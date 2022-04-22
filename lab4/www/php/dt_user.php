@@ -10,11 +10,12 @@ require('../query/conDB.php');
             <th>Surname</th>
             <th>Age</th>
             <th>Sex</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <?php
-        $sql = "SELECT * FROM td_user ORDER BY age ASC";
+        $sql = "SELECT * FROM tb_user ORDER BY name ASC";
         $result = $mysqli->query($sql);
         $i = 1;
         while ($row = $result->fetch_assoc()) {
@@ -26,7 +27,7 @@ require('../query/conDB.php');
                 <td><?= $row['age'] ?></td>
                 <td><?= $row['sex'] ?></td>
                 <td>
-                <button> class="btn-user" data-name=""<?= $row['name'] ?>">DEL</button>
+                    <button class="btn-del" data-name="<?= $row['name'] ?>">Del</button>
                 </td>
             </tr>
         <?php
@@ -36,17 +37,15 @@ require('../query/conDB.php');
 </table>
 <script>
     $(".btn-del").click(function(){
-        $data = $(this).data("name")
-        // alert(data);
+        let data = $(this).data("name");
+        //alert($data);
         $.ajax({
             url:"./query/user_del.php",
             method: "POST",
-            data: {
-                name: date
-            },
-            success: function(){
+            data: {name:data},
+            success:function(){
                 $("#div_content").load("./php/dt_user.php");
             }
         });
     });
-</script>    
+</script>

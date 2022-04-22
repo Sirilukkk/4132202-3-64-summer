@@ -1,7 +1,7 @@
 <form id="frm_add">
     <div>
         <label> Name : </label>
-        <input type="text" name="name" require>
+        <input type="text" name="name" required>
     </div>
     <div>
         <label> Surname : </label>
@@ -14,31 +14,27 @@
     <div>
         <label> Sex : </label>
         <select name="sex">
-            <option value="">กรุณาเลือก</option>
+            <option value="#">กรุณาเลือก</option>
             <option value="1">ชาย</option>
             <option value="2">หญิง</option>
         </select>
     </div>
-        <button type="submit">SAVE</button>
-        <button type="reset">RESET</button>
+    <button type="submit">Save</button>
+    <button type="reset">Reset</button>
 </form>
-
 <script>
     $("#frm_add").submit(function(e) {
         e.preventDefault();
-
         let data = $(this).serialize()
         // console.log(data);
-
         $.ajax({
-            url:"./query/user_add.php",
+            url: "./query/user_add.php",
             method: "POST",
             data: data,
-            success:function(msg) {
+            success: function(msg) {
                 console.log(msg);
-
-                $("#div_content").load("dt_user.php");
+                $("#div_content").load("./php/dt_user.php");
             }
         });
     });
-</script>    
+</script>
